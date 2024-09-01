@@ -2,9 +2,12 @@ import Hero from '@/components/Hero'
 import HomePropertyCard from '@/components/HomePropertyCard'
 import InfoBoxes from '@/components/InfoBoxes'
 import Link from 'next/link'
-import properties from "@/properties.json"
+import connectDB from '@/config/db'
+import Property from '@/models/Property'
 
-const HomePage = () => {
+const HomePage = async() => {
+    await connectDB()
+    const recentProperties = await Property.find({}).sort({createdAt: -1}).limit(3).lean()
     return (
         <>
             <Hero></Hero>
@@ -14,7 +17,7 @@ const HomePage = () => {
                 <div className="container-xl lg:container m-auto px-4 py-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <HomePropertyCard   
-                            properties={properties}
+                            properties={recentProperties}
                         />
                     </div>
                 </div>

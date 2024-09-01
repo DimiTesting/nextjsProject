@@ -4,8 +4,6 @@ import {FaBed, FaBath, FaRulerCombined, FaMapMarker, FaMoneyBill} from 'react-ic
 
 const HomePropertyCard = ({properties}) => {
 
-    properties = properties.slice(0,3)
-
     return (
         properties.length>0 ? (
             properties.map((property) => (
